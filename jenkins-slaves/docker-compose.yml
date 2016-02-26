@@ -1,0 +1,87 @@
+keydata:
+  image: appcontainers/jenkins:debian
+  hostname: jenkins-keys
+  stdin_open: true
+  tty: true
+  volumes:
+  - /var/lib/jenkins_slave_key
+  environment:
+  - ROLE=slave
+  - SSH_PASS=jenkinspassword
+  command: sleep 1 
+ 
+data:
+  image: appcontainers/jenkins:debian
+  hostname: jenkins-data
+  stdin_open: true
+  tty: true
+  volumes_from:
+  - keydata
+  volumes:
+  - /var/lib/jenkins
+  environment:
+  - ROLE=slave
+  - SSH_PASS=jenkinspassword
+  command: sleep 1
+ 
+dockerslave:
+  image: appcontainers/jenkins:debian
+  hostname: docker-slave
+  stdin_open: true
+  tty: true
+  restart: always
+  privileged: true
+  environment:
+  - ROLE=slave
+  - SSH_PASS=jenkinspassword
+  volumes_from:
+  - keydata
+  volumes:
+  - /var/run/docker.sock:/var/run/docker.sock
+  command: /bin/bash
+ 
+nodeslave0:
+  image: appcontainers/jenkins:debian
+  hostname: node-slave-0
+  stdin_open: true
+  tty: true
+  restart: always
+  volumes_from:
+  - keydata
+  environment:
+  - ROLE=slave
+  - SSH_PASS=jenkinspassword
+  command: /bin/bash
+
+nodeslave:
+  image: appcontainers/jenkins:debian
+  hostname: node-slave
+  stdin_open: true
+  tty: true
+  restart: always
+  volumes_from:
+  - keydata
+  environment:
+  - ROLE=slave
+  - SSH_PASS=jenkinspassword
+  command: /bin/bash
+
+web:
+  image: appcontainers/jenkins:debian
+  hostname: jenkins
+  stdin_open: true
+  tty: true
+  restart: always
+  ports:
+  - "7000:8080"
+  environment:
+  - ROLE=master
+  - SSH_PASS=jenkinspassword
+  volumes_from:
+  - keydata
+  - data
+  links:
+  - dockerslave
+  - nodeslave
+  - nodeslave0
+  command: /bin/bash
