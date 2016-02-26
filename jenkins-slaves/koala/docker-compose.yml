@@ -73,7 +73,7 @@ web:
   tty: true
   restart: always
   ports:
-  - "7002:8080"
+  - "7000:8080"
   environment:
   - ROLE=master
   - SSH_PASS=jenkinspassword
