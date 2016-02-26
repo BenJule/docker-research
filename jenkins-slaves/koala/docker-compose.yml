@@ -1,5 +1,5 @@
 keydata:
-  image: appcontainers/jenkins:latest
+  image: koala/jenkins-slave
   hostname: jenkins-keys
   stdin_open: true
   tty: true
@@ -11,21 +11,21 @@ keydata:
   command: sleep 1 
  
 data:
-  image: appcontainers/jenkins:latest
+  image: koala/jenkins-slave
   hostname: jenkins-data
   stdin_open: true
   tty: true
   volumes_from:
   - keydata
   volumes:
-  - /var/lib/jenkins
+  - /home/docker/jenkins_0:/var/lib/jenkins
   environment:
   - ROLE=slave
   - SSH_PASS=jenkinspassword
   command: sleep 1
  
 dockerslave:
-  image: appcontainers/jenkins:latest
+  image: koala/jenkins-slave
   hostname: docker-slave
   stdin_open: true
   tty: true
@@ -41,7 +41,7 @@ dockerslave:
   command: /bin/bash
  
 nodeslave0:
-  image: appcontainers/jenkins:latest
+  image: koala/jenkins-slave
   hostname: node-slave-0
   stdin_open: true
   tty: true
@@ -54,7 +54,7 @@ nodeslave0:
   command: /bin/bash
 
 nodeslave:
-  image: appcontainers/jenkins:latest
+  image: koala/jenkins-slave
   hostname: node-slave
   stdin_open: true
   tty: true
@@ -67,13 +67,13 @@ nodeslave:
   command: /bin/bash
 
 web:
-  image: appcontainers/jenkins:latest
+  image: koala/jenkins-slave
   hostname: jenkins
   stdin_open: true
   tty: true
   restart: always
   ports:
-  - "7000:8080"
+  - "7002:8080"
   environment:
   - ROLE=master
   - SSH_PASS=jenkinspassword

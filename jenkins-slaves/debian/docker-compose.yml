@@ -1,5 +1,5 @@
 keydata:
-  image: appcontainers/jenkins:latest
+  image: appcontainers/jenkins:debian
   hostname: jenkins-keys
   stdin_open: true
   tty: true
@@ -11,7 +11,7 @@ keydata:
   command: sleep 1 
  
 data:
-  image: appcontainers/jenkins:latest
+  image: appcontainers/jenkins:debian
   hostname: jenkins-data
   stdin_open: true
   tty: true
@@ -25,7 +25,7 @@ data:
   command: sleep 1
  
 dockerslave:
-  image: appcontainers/jenkins:latest
+  image: appcontainers/jenkins:debian
   hostname: docker-slave
   stdin_open: true
   tty: true
@@ -41,7 +41,7 @@ dockerslave:
   command: /bin/bash
  
 nodeslave0:
-  image: appcontainers/jenkins:latest
+  image: appcontainers/jenkins:debian
   hostname: node-slave-0
   stdin_open: true
   tty: true
@@ -54,7 +54,7 @@ nodeslave0:
   command: /bin/bash
 
 nodeslave:
-  image: appcontainers/jenkins:latest
+  image: appcontainers/jenkins:debian
   hostname: node-slave
   stdin_open: true
   tty: true
@@ -67,7 +67,7 @@ nodeslave:
   command: /bin/bash
 
 web:
-  image: appcontainers/jenkins:latest
+  image: appcontainers/jenkins:debian
   hostname: jenkins
   stdin_open: true
   tty: true
