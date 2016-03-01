@@ -1,5 +1,5 @@
 # VESION 0.0.1
-# jenkins slave for node0.10.35
+# jenkins slave for docker
 
 FROM appcontainers/jenkins:debian
 MAINTAINER zysam
