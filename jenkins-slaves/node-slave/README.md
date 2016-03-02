@@ -1,14 +1,4 @@
-### 测试容器
 
-```
-docker run -it \
---privileged \
---name j-test \
---volumes-from jenkins_keydata_1 \
--h j-test \
--e ROLE="slave" \
-appcontainers/jenkins:debian
-```
 
 ### 安装node及其它
 	apt-get update && apt-get -y install python gcc make g++ vim
