@@ -1,0 +1,5 @@
+*.password
+*.crt
+*.key
+*.csr
+*.srl
