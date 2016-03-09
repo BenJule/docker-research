@@ -37,6 +37,22 @@ docker run -it --rm \
 	-e ROLE="slave" \
 	koala/jenkins-slave
 
+
+### 对 slave 安装必要软件
+
+- docker
+
+```sh
+Setting up the Docker Slave:
+
+docker attach docker_slave
+yum install -y docker-io
+gpasswd -a jenkins docker
+ 
+# Add the following to /etc/sudoers:
+    jenkins ALL=(ALL) NOPASSWD: ALL
+```
+
 ### Dockerfile [hub.docker.com](https://hub.docker.com/r/appcontainers/jenkins/)
 
 CentOS 6.7 Based Customizable Jenkins Container - 494 MB - Updated 12/27/2015

@@ -4,6 +4,8 @@
 FROM appcontainers/jenkins:debian
 MAINTAINER zysam
 
+# node vesion
+ENV VESION v0.10.35
 # Edit sources
 RUN cp /etc/apt/sources.list /etc/apt/sources.list.bak
 RUN echo "deb http://mirrors.163.com/debian/ jessie main non-free contrib" > /etc/apt/sources.list
@@ -19,10 +21,11 @@ RUN echo "deb-src http://mirrors.163.com/debian-security/ jessie/updates main no
 # VERSION 0.10.35
 RUN mkdir /apps
 WORKDIR /apps
-RUN wget http://npm.taobao.org/mirrors/node/v0.10.35/node-v0.10.35-linux-x64.tar.gz && \
-	tar xzf node-v0.10.35-linux-x64.tar.gz && \
-	ln -s /apps/node-v0.10.35-linux-x64/bin/node /usr/local/bin/node && \
-	ln -s /apps/node-v0.10.35-linux-x64/bin/npm /usr/local/bin/npm
+RUN wget http://npm.taobao.org/mirrors/node/{$VERSION}/node-{$VERSION}-linux-x64.tar.gz && \
+	tar xzf node-{$VERSION}-linux-x64.tar.gz && \
+	ln -s /apps/node-{$VERSION}-linux-x64/bin/node /usr/local/bin/node && \
+	ln -s /apps/node-{$VERSION}-linux-x64/bin/npm /usr/local/bin/npm && \
+	RUN rm /apps/node-{$VERSION}-linux-x64.tar.gz
 
 # npm set cnpm
 RUN npm config set registry https://registry.npm.taobao.org && \
@@ -31,12 +34,10 @@ RUN npm config set registry https://registry.npm.taobao.org && \
 # Install packages
 RUN apt-get update
 RUN apt-get -y install curl vim
-RUN apt-get -y install python gcc make g++
+RUN apt-get -y install python gcc make g++ && \
+	apt-get clean && \
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
-# clean
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-RUN rm /apps/node-v0.10.35-linux-x64.tar.gz
 
 ###################################################################
 #*****************  CONFIGURE START ITEMS  ************************

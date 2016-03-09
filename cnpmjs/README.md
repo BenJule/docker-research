@@ -22,7 +22,7 @@ docker run -d \
   -v ${PWD}:/data  \
   -p 7011:7001 \
   -p 7012:7002 \
-  zysam/cnpmjs \
+  docker.koala.cn/cnpmjs \
   cnpmjs.org start \
     --admins='admin, test' \
     --scopes='@admin, @test' \

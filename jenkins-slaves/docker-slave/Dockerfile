@@ -24,8 +24,8 @@ RUN curl -sSL https://get.docker.com/ | sh
 RUN service docker start
 
 # clean
-RUN apt-get clean
-RUN rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+RUN apt-get clean && \
+	rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 ###################################################################
 #*****************  CONFIGURE START ITEMS  ************************
