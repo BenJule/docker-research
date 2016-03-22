@@ -4,12 +4,14 @@
 用法
 -----
 
-    docker build -t sam/node .
+    docker build -t zysam/node-ssh .
 
-		docker run -d -p 8822:22 sam/node
+		docker run -d --name node-dev -p 8822:22 -p 13000-13008:3000-3008 -e ROOT_PASS="123456" zysam/node-ssh
 
 ### 问题
 	如果无法ssh, 还得修改 sshd_config 配置
+	PermitRootLogin without-password
+	PermitRootLogin yes
 	
 运行结果
 ---
