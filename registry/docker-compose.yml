@@ -1,5 +1,6 @@
 nginx:
   image: nginx
+  restart: always
   ports:
     - 5043:443
   links:
@@ -8,7 +9,8 @@ nginx:
     - ./nginx/:/etc/nginx/conf.d
 
 registry:
-  image: registry
+  image: registry：2.3
+  restart: always
   ports:
     - 127.0.0.1:5000:5000
   environment:  
