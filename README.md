@@ -1,13 +1,11 @@
-### 说明
+### 一些 Dockerfile 例子
 
-- dockerfile 例子
-- docker-compose 例子
-- test
-
-### 安装
-
-脚本安装，省事！
-```
-sudo curl -sSL https://get.docker.com/ | sh
-
-```
+- alpine-node
+- elk
+- jenkins-slave-alpine
+- jenkins-slave
+- mongo
+- node-ssh
+- npm-taobao
+- registry
+- docker-registry-nginx
